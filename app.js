@@ -1,14 +1,15 @@
-const express=require('express')
-const bodyparser=require('body-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const app=express();
-const adminRoutes=require('./routes/admin')
-const shopRoutes=require('./routes/shop')
+const app = express();
 
-app.use(bodyparser.urlencoded({extended:false}));
+const loginRoute = require("./group_chat_app/login");
+const msgRoute = require("./group_chat_app/msg");
 
-app.use('/admin',adminRoutes);
-app.use('/shop',shopRoutes);
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(loginRoute);
+app.use(msgRoute);
 app.use((req,res,next)=>{
     res.status(404).send('<h2>Page Not Found&#10071; Check URL and try again &#128531</h2>')
 })
